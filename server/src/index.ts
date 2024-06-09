@@ -19,7 +19,7 @@ const mongoURI = process.env.MONGO_URI || "";
 const app = express();
 // app use 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://project-ecom-frontend-6a3lhwiy5-ryugas-projects-09500f35.vercel.app",
     credentials: true,
 }));
 app.use(cookieParser())
