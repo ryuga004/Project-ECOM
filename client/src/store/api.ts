@@ -6,7 +6,7 @@ import { allProductsResponseType, categoriesResponseType, productPostType } from
 export const API = createApi({
     reducerPath: 'API',
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:5000/api/v1/",
+        baseUrl: "https://project-ecom-backend-ryugas-projects-09500f35.vercel.app/",
         prepareHeaders(headers) {
             return headers;
         },
