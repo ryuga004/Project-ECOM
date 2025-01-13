@@ -6,7 +6,7 @@ import { allProductsResponseType, categoriesResponseType, productPostType } from
 export const API = createApi({
     reducerPath: 'API',
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://project-ecom-backend-ryugas-projects-09500f35.vercel.app/",
+        baseUrl: "https://project-ecom-backend.vercel.app/",
         prepareHeaders(headers) {
             return headers;
         },
@@ -19,7 +19,7 @@ export const API = createApi({
             providesTags: ["categories"],
         }),
         getProducts: builder.query<allProductsResponseType, productPostType>({
-            query: ({ categoryName, searchKeyword, CurrentPage }) => `/product/allProducts?` + (categoryName !== "All" ? `&category=${categoryName}` : "") + `&keyword=${searchKeyword}` + `&page=${CurrentPage}`
+            query: ({ categoryName, searchKeyword, CurrentPage }) => `product/allProducts?` + (categoryName !== "All" ? `&category=${categoryName}` : "") + `&keyword=${searchKeyword}` + `&page=${CurrentPage}`
         }),
         registerUser: builder.mutation<any, FormData>({
             query: (FORMDATA) => ({

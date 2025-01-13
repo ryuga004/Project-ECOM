@@ -8,7 +8,7 @@ import { useGetCurrentUserQuery, useLoginUserMutation, useRegisterUserMutation }
 
 axios.defaults.withCredentials = true;
 
-const BaseUrl = "http://localhost:5000/api/v1";
+const BaseUrl = "https://project-ecom-backend.vercel.app";
 
 const Login = () => {
     const dispatch = useAppDispatch();
