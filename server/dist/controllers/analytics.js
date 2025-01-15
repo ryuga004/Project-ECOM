@@ -4,11 +4,6 @@ import User from "../models/user.js";
 import Order from "../models/order.js";
 import ErrorHandler from "../utils/utility-class.js";
 export const getAnalyticsData = TryCatch(async (req, res, next) => {
-    // NO of products , customers
-    // total sales
-    // male , female no. 
-    // array of categories with array of corresponding number of products 
-    // line graph data ? each month 
     const products = await Product.find();
     const users = await User.find();
     const orders = await Order.find();
@@ -19,10 +14,8 @@ export const getAnalyticsData = TryCatch(async (req, res, next) => {
     orders.forEach((elem) => {
         sales += elem.totalPrice;
     });
-    // const categoriesSet = new Set<string>();
     const MapCategory = new Map();
     products.forEach((item) => {
-        // categoriesSet.add(item.category)
         if (MapCategory.get(item.category)) {
             MapCategory.set(item.category, MapCategory.get(item.category) + 1);
         }
@@ -58,7 +51,6 @@ export const getAnalyticsData = TryCatch(async (req, res, next) => {
         NOP: products.length,
         NOC: users.length,
         Sales: sales,
-        // Categories: Array.from(categoriesSet),
         Categories: categories,
         CategoriesData: categoriesData,
         Male: NoMale,

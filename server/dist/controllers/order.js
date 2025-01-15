@@ -15,7 +15,6 @@ export const newOrder = TryCatch(async (req, res, next) => {
         paidAt: Date.now(),
         user: req.userId,
     });
-    // image has to set here ...
     await order.populate("orderItems.product", "images.url");
     return res.status(200).json({
         success: true,
@@ -65,9 +64,6 @@ export const updateOrder = TryCatch(async (req, res, next) => {
         });
     }
     order.orderStatus = req.body.status;
-    // if (req.body.status === "Delivered") {
-    //     order.deliveredAt = Date.now();
-    // }
     await order.save({ validateBeforeSave: false });
     return res.status(200).json({
         success: true,
