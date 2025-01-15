@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 8000;
 const mongoURI = process.env.MONGO_URI || "";
 const app = express();
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: `${process.env.FRONTEND_URL}`,
     credentials: true,
 }));
 app.use(cookieParser());
