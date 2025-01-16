@@ -11,7 +11,7 @@ import UserRoutes from "./routes/user.js";
 import { connectDB } from "./utils/feature.js";
 dotenv.config();
 const PORT = process.env.PORT || 8000;
-const mongoURI = process.env.MONGO_URI || "";
+const mongoURI = process.env.MONGO_URI || "mongodb+srv://ryuga:ryuga@cluster0.7nwwn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const app = express();
 app.use(cors({
     origin: "https://project-ecom-frontend.vercel.app",
@@ -27,6 +27,10 @@ app.use("/api/order", OrderRoutes);
 app.use("/api", AnalyticsRoute);
 // connection to database 
 connectDB(mongoURI);
+app.use((err, req, res) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+});
 // error middleware 
 app.use(errorMiddleware);
 // server 

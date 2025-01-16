@@ -2,7 +2,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from 'dotenv'
-import express from "express";
+import express, { Request, Response } from "express";
 import { errorMiddleware } from "./middleware/error.js";
 import AnalyticsRoute from "./routes/analytics.js";
 import OrderRoutes from "./routes/order.js";
@@ -14,7 +14,7 @@ dotenv.config()
 
 
 const PORT = process.env.PORT || 8000;
-const mongoURI = process.env.MONGO_URI || "";
+const mongoURI = process.env.MONGO_URI || "mongodb+srv://ryuga:ryuga@cluster0.7nwwn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const app = express();
 
@@ -33,7 +33,10 @@ app.use("/api/order", OrderRoutes);
 app.use("/api", AnalyticsRoute)
 // connection to database 
 connectDB(mongoURI);
-
+app.use((err: any, req: Request, res: Response) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+});
 // error middleware 
 app.use(errorMiddleware);
 
