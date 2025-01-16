@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
 
 export const connectDB = (uri: string): void => {
-    mongoose.connect(uri, {
+    mongoose.connect("mongodb+srv://ryuga:ryuga@cluster0.7nwwn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
         dbName: "ECOM",
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        maxPoolSize: 10,
     } as mongoose.ConnectOptions).then((connection) =>
         console.log(`DB Connected to ${connection.connection.host}`)
     ).catch((error) => {

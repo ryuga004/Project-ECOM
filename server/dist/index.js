@@ -27,10 +27,6 @@ app.use("/api/order", OrderRoutes);
 app.use("/api", AnalyticsRoute);
 // connection to database 
 connectDB(mongoURI);
-app.use((err, req, res) => {
-    console.error(err.stack);
-    res.status(500).send("Something broke!");
-});
 // error middleware 
 app.use(errorMiddleware);
 // server 
