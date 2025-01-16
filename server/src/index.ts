@@ -27,10 +27,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // api routes 
-app.use("/user", UserRoutes);
-app.use("/product", ProductRoutes);
-app.use("/order", OrderRoutes);
-app.use("/", AnalyticsRoute)
+app.use("/api/user", UserRoutes);
+app.use("/api/product", ProductRoutes);
+app.use("/api/order", OrderRoutes);
+app.use("/api", AnalyticsRoute)
 // connection to database 
 connectDB(mongoURI);
 
