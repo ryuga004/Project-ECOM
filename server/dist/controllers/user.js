@@ -6,12 +6,13 @@ import { JWT_SECRET } from "../config.js";
 const SECRET = JWT_SECRET;
 export const registerUser = TryCatch(async (req, res, next) => {
     const { username, email, password, avatar, role, gender } = req.body;
-    const img = `../uploads/${req.file?.filename}`;
+    const file = req.file;
+    let avatarUrl = file?.cloudinary?.secure_url || "";
     const NewUser = await User.create({
         username,
         email,
         password,
-        avatar: img ? img : avatar,
+        avatar: avatarUrl,
         role: role,
         gender
     });
