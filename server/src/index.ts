@@ -14,23 +14,25 @@ dotenv.config()
 
 
 const PORT = process.env.PORT || 8000;
-const mongoURI = process.env.MONGO_URI || "mongodb+srv://ryuga:ryuga@cluster0.7nwwn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const mongoURI = process.env.MONGO_URI || "";
 
 const app = express();
 
 app.use(cors({
     origin: "https://project-ecom-frontend.vercel.app",
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['X-CSRF-Token', 'X-Requested-With', 'Accept', 'Accept-Version', 'Content-Length', 'Content-MD5', 'Content-Type', 'Date', 'X-Api-Version']
 }));
 app.use(cookieParser())
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // api routes 
-app.use("/api/user", UserRoutes);
-app.use("/api/product", ProductRoutes);
-app.use("/api/order", OrderRoutes);
-app.use("/api", AnalyticsRoute)
+app.use("/api/v1/user", UserRoutes);
+app.use("/api/v1/product", ProductRoutes);
+app.use("/api/v1/order", OrderRoutes);
+app.use("/api/v1", AnalyticsRoute)
 // connection to database 
 connectDB(mongoURI);
 

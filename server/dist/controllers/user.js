@@ -1,10 +1,9 @@
-import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { TryCatch } from "../middleware/error.js";
 import User from "../models/user.js";
 import ErrorHandler from "../utils/utility-class.js";
-dotenv.config();
-const SECRET = process.env.JWT_SECRET || "";
+import { JWT_SECRET } from "../config.js";
+const SECRET = JWT_SECRET;
 export const registerUser = TryCatch(async (req, res, next) => {
     const { username, email, password, avatar, role, gender } = req.body;
     const img = `../uploads/${req.file?.filename}`;
@@ -40,6 +39,8 @@ export const loginUser = TryCatch(async (req, res, next) => {
     const options = {
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
         httpOnly: true,
+        sameSite: "none",
+        secure: true,
     };
     return res.status(200).cookie("token", token, options).json({
         message: "user login successfully",

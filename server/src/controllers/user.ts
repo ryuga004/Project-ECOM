@@ -1,13 +1,13 @@
 import dotenv from "dotenv";
-import { NextFunction, Request, Response } from "express";
+import { CookieOptions, NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { TryCatch } from "../middleware/error.js";
 import User from "../models/user.js";
 import { AuthenticatedRequest, LoginUserRequestBody, NewUserRequestBody } from "../utils/types.js";
 import ErrorHandler from "../utils/utility-class.js";
-dotenv.config()
+import { JWT_SECRET } from "../config.js";
 
-const SECRET = process.env.JWT_SECRET || "";
+const SECRET = JWT_SECRET;
 export const registerUser = TryCatch(
     async (req: Request<{}, {}, NewUserRequestBody>,
         res: Response,
@@ -55,11 +55,13 @@ export const loginUser = TryCatch(async (req: Request<{}, {}, LoginUserRequestBo
         expiresIn: "2 day"
     })
 
-    const options = {
+    const options: CookieOptions = {
         expires: new Date(
             Date.now() + 24 * 60 * 60 * 1000
         ),
         httpOnly: true,
+        sameSite: "none",
+        secure: true,
     }
 
     return res.status(200).cookie("token", token, options).json({
