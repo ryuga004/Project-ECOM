@@ -9,9 +9,6 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 
-
-
-
 export const singleUpload = (req: Request, res: Response, next: NextFunction): void => {
     upload.single("photo")(req, res, async (err) => {
         if (err) return res.status(400).json({ error: err.message });
