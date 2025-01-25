@@ -1,12 +1,12 @@
-import dotenv from "dotenv";
 import { CookieOptions, NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import { Readable } from "stream";
+import { JWT_SECRET } from "../config.js";
 import { TryCatch } from "../middleware/error.js";
 import User from "../models/user.js";
-import { AuthenticatedRequest, CustomFile, LoginUserRequestBody, NewUserRequestBody } from "../utils/types.js";
+import { AuthenticatedRequest, LoginUserRequestBody, NewUserRequestBody } from "../utils/types.js";
 import ErrorHandler from "../utils/utility-class.js";
-import { JWT_SECRET } from "../config.js";
-
+import { v2 as cloudinary } from "cloudinary";
 const SECRET = JWT_SECRET;
 export const registerUser = TryCatch(
     async (req: Request<{}, {}, NewUserRequestBody>,
@@ -15,14 +15,37 @@ export const registerUser = TryCatch(
     ) => {
         const { username, email, password, avatar, role, gender
         } = req.body;
-        const file = req.file as CustomFile
-        let avatarUrl = file?.cloudinary?.secure_url || ""
+        let imageUrl = null;
+
+
+        if (req.file) {
+            const stream = Readable.from(req.file.buffer);
+
+            try {
+                const result: any = await new Promise((resolve, reject) => {
+                    const streamUpload = cloudinary.uploader.upload_stream(
+                        { folder: "posts" },
+                        (error, result) => {
+                            if (result) resolve(result);
+                            else reject(error);
+                        }
+                    );
+
+                    stream.pipe(streamUpload);
+                });
+
+                imageUrl = result.secure_url;
+            } catch (error) {
+                return next(new ErrorHandler("Image upload failed", 500));
+            }
+        }
+
 
         const NewUser = await User.create({
             username,
             email,
             password,
-            avatar: avatarUrl,
+            avatar: imageUrl || "",
             role: role,
             gender
         })

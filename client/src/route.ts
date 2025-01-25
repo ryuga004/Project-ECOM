@@ -2,6 +2,7 @@ import axios from 'axios';
 import { LoginInputType, ReviewFormDataType, shippingInfoDataType } from './types/alltypes';
 import { allProductsResponseType, categoriesResponseType } from './types/api_types';
 
+// const baseURL = "http://localhost:5000/api/v1";
 const baseURL = "https://project-ecom-backend.vercel.app/api/v1";
 
 // Create axios instance
