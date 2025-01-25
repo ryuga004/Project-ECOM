@@ -41,7 +41,7 @@ const PieChart = ({ Male = 54, Female = 44 }: PropsType) => {
         datasets: [
             {
                 label: 'Count',
-                data: [54, 44],
+                data: [male, female],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.6)', // Male: Blue
                     'rgba(255, 99, 132, 0.6)', // Female: Red

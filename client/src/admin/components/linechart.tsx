@@ -1,13 +1,13 @@
 
 import {
+    CategoryScale,
     Chart as ChartJS,
+    Legend,
     LinearScale,
-    PointElement,
     LineElement,
+    PointElement,
     Title,
     Tooltip,
-    CategoryScale,
-    Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -50,7 +50,7 @@ const LineChart = ({ MonthData }: PropsType) => {
             },
         ],
     };
-    const options = {
+    const options: any = {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {

@@ -1,12 +1,11 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { CgAdd } from "react-icons/cg";
 import { FaTrash } from "react-icons/fa";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import { TiDeleteOutline } from "react-icons/ti";
-import SideBar from "./components/sidebar";
 import { getAdminAddProduct, getAdminProductDelete, getAdminProducts } from "../route";
 import { formDataTypeProduct } from "./admintypes";
+import SideBar from "./components/sidebar";
 
 
 

@@ -1,13 +1,11 @@
-import React from 'react';
 import {
-    Chart as ChartJS,
     BarElement,
     CategoryScale,
-    LinearScale,
-    Tooltip,
+    Chart as ChartJS,
     Legend,
+    LinearScale,
     Title,
-    plugins,
+    Tooltip
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 

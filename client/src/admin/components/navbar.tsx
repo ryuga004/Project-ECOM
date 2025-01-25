@@ -6,9 +6,9 @@ import { CgShoppingCart } from "react-icons/cg";
 import { RiLoginBoxFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import { logoutUser } from "../../route";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { setUser } from "../../store/userSlice";
+import { clearUser } from "../../store/userSlice";
 
 
 
@@ -19,17 +19,12 @@ const AdminNavBar = () => {
     const user = useAppSelector((state) => state.user.user);
     const dispatch = useAppDispatch();
     const handleLogout = async () => {
-        const res = await axios.get("http://localhost:5000/api/v1/user/logout");
-        if (res.data.success) {
-            dispatch(setUser({
-                id: "",
-                username: "",
-                email: "",
-                profileImage: "",
-                role: "",
-            }))
+        const response = await logoutUser();
+        if (response) {
+            dispatch((clearUser()));
+            navigate("/login");
         }
-    }
+    };
     return (
         <>
             <nav className="NavBarContainer">
