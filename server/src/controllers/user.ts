@@ -3,7 +3,7 @@ import { CookieOptions, NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { TryCatch } from "../middleware/error.js";
 import User from "../models/user.js";
-import { AuthenticatedRequest, LoginUserRequestBody, NewUserRequestBody } from "../utils/types.js";
+import { AuthenticatedRequest, CustomFile, LoginUserRequestBody, NewUserRequestBody } from "../utils/types.js";
 import ErrorHandler from "../utils/utility-class.js";
 import { JWT_SECRET } from "../config.js";
 
@@ -15,13 +15,14 @@ export const registerUser = TryCatch(
     ) => {
         const { username, email, password, avatar, role, gender
         } = req.body;
-        const img = `../uploads/${req.file?.filename}`;
+        const file = req.file as CustomFile
+        let avatarUrl = file?.cloudinary?.secure_url || ""
 
         const NewUser = await User.create({
             username,
             email,
             password,
-            avatar: img ? img : avatar,
+            avatar: avatarUrl,
             role: role,
             gender
         })

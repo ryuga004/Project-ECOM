@@ -1,3 +1,4 @@
+import { UploadApiResponse } from "cloudinary";
 import { NextFunction, Request, Response } from "express"
 
 export type ControllerType = (
@@ -96,4 +97,12 @@ export interface OrderRequestBody {
 
 export interface AuthenticatedOrderRequest extends Request<{}, {}, OrderRequestBody> {
     userId?: string,
+}
+export interface CustomFile {
+    originalname: string;
+    buffer: Buffer;
+    stream: NodeJS.ReadableStream;
+    mimetype: string;
+    size: number;
+    cloudinary?: UploadApiResponse;
 }
