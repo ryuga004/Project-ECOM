@@ -1,8 +1,7 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
-import SideBar from './components/sidebar';
 import { getAdminOrders } from '../route';
+import SideBar from './components/sidebar';
 
 const AdminOrder = () => {
     const [orders, setOrders] = useState<Array<any>>([]);

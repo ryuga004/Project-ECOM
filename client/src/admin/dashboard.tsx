@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import BarChart from "./components/barchart";
 import HorizontalBarChart from "./components/horizontalbar";
@@ -9,8 +8,8 @@ import { CgArrowsExpandUpRight, CgShoppingBag } from "react-icons/cg";
 import { FaDollarSign, FaUsers } from "react-icons/fa";
 import { HiTrendingUp } from "react-icons/hi";
 import { RiRedPacketFill } from "react-icons/ri";
-import { AnalyticsDataType } from "./admintypes";
 import { getAdminAnalytics } from "../route";
+import { AnalyticsDataType } from "./admintypes";
 
 
 
