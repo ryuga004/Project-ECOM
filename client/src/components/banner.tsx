@@ -4,9 +4,9 @@ import { ImageBannerProps } from "../types/propsType";
 const ImageBanner = ({ title, description }: ImageBannerProps) => {
     const [currentSlide, setCurrentSlide] = useState<number>(0);
     const images = [
-        "../src/assets/bannerImage1.png",
-        "../src/assets/bannerImage2.png",
-        "../src/assets/bannerImage3.png",
+        "https://res.cloudinary.com/ddnkhbxqd/image/upload/v1737789824/bannerImage1_t5lesh.png",
+        "https://res.cloudinary.com/ddnkhbxqd/image/upload/v1737789823/bannerImage2_ic4wag.png",
+        "https://res.cloudinary.com/ddnkhbxqd/image/upload/v1737789823/bannerImage3_lpsh6l.png",
     ];
 
     useEffect(() => {

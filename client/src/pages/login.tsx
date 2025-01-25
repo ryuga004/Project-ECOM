@@ -2,8 +2,8 @@ import React, { memo, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { HiHome } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import imageicon from "../assets/defaultProfileImage.png";
-import loginImage from "../assets/loginImage.png";
+import imageicon from "https://res.cloudinary.com/ddnkhbxqd/image/upload/v1737789821/defaultProfileImage_zuehl5.png";
+import loginImage from "https://res.cloudinary.com/ddnkhbxqd/image/upload/v1737789822/loginImage_usnizb.png";
 
 import { getCurrentUser, loginUser, registerUser } from "../route";
 import { useAppDispatch } from "../store/hook";
