@@ -2,11 +2,11 @@
 import express from 'express';
 import { deleteUser, getAllUser, getSingleUser, getUserDetails, loginUser, logout, registerUser, updateUserRole } from '../controllers/user.js';
 import { authorizeRoles, isAuthenticatedUser } from '../middleware/auth.js';
-import { singleUpload } from '../middleware/multer.js';
 
 const router = express.Router();
 
-router.post("/register", singleUpload, registerUser);
+router.post("/register", registerUser);
+// router.post("/register", singleUpload, registerUser);
 router.post("/login", loginUser);
 router.get("/logout", logout);
 router.get("/me", isAuthenticatedUser, getUserDetails);
