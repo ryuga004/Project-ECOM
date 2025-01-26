@@ -10,7 +10,6 @@ const ImageBanner = ({ title, description }: ImageBannerProps) => {
         "https://res.cloudinary.com/ddnkhbxqd/image/upload/v1737789823/bannerImage3_lpsh6l.png",
     ];
 
-    const sectionRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const slideInterval = setInterval(() => {
