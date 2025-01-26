@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from "react";
-import { ImageBannerProps } from "../types/propsType";
+import { useEffect, useRef, useState } from "react";
 import { CgChevronLeft, CgChevronRight } from "react-icons/cg";
+import { ImageBannerProps } from "../types/propsType";
 
 const ImageBanner = ({ title, description }: ImageBannerProps) => {
     const [currentSlide, setCurrentSlide] = useState<number>(0);
