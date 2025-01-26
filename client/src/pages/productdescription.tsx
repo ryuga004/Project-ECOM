@@ -71,7 +71,7 @@ const ProductDescription = () => {
             <NavBar />
             <div className="flex flex-col lg:flex-row p-6 bg-orange-50  ">
 
-                <aside className="w-full lg:w-1/2">
+                <aside className="w-full lg:w-1/2 ">
                     <Slider images={fetchProductData?.data?.images ? fetchProductData.data.images : []} />
                 </aside>
                 <main className="w-full lg:w-1/2 flex flex-col justify-between  p-3">

@@ -24,7 +24,7 @@ const Slider = ({ images }: SliderType) => {
             </main>
 
             {/* Main Image Display */}
-            <aside className="flex justify-center items-center w-full  h-100 bg-gray-100 rounded-lg shadow-lg overflow-hidden">
+            <aside className="flex justify-center items-center w-full  h-100 lg:h-[500px] bg-gray-100 rounded-lg shadow-lg overflow-hidden">
                 <img
                     src={images[index]?.url}
                     alt="Product Main"

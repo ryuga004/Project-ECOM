@@ -54,7 +54,7 @@ const Dashboard = () => {
     })).sort((a, b) => b.value - a.value).slice(0, 5);
 
     return (
-        <div className="flex min-h-screen w-full bg-slate-50">
+        <div className="flex min-h-screen w-full bg-orange-50">
 
             <aside className="sticky top-0 h-screen">
                 <SideBar />
@@ -89,7 +89,7 @@ const Dashboard = () => {
                                 </div>
                                 <div>
                                     <p className="text-sm text-slate-500">Total Sales</p>
-                                    <h3 className="text-2xl font-bold text-slate-800">${analyticsData.totalSales}</h3>
+                                    <h3 className="text-2xl font-bold text-slate-800">₹{analyticsData.totalSales}</h3>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@ const Dashboard = () => {
                                 </div>
                                 <div>
                                     <p className="text-sm text-slate-500">Avg. Sale/Customer</p>
-                                    <h3 className="text-2xl font-bold text-slate-800">${averageSalePerCustomer.toFixed(2)}</h3>
+                                    <h3 className="text-2xl font-bold text-slate-800">₹{averageSalePerCustomer.toFixed(2)}</h3>
                                 </div>
                             </div>
                         </div>
@@ -230,7 +230,7 @@ const Dashboard = () => {
                             <div className="flex items-center justify-between">
                                 <div className="space-y-2">
                                     <p className="text-3xl font-bold text-slate-800">
-                                        ${averageSalePerCustomer.toFixed(2)}
+                                        ₹{averageSalePerCustomer.toFixed(2)}
                                     </p>
                                     <p className="text-sm text-green-600 flex items-center gap-1">
                                         <HiTrendingUp size={16} />

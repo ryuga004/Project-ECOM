@@ -50,6 +50,9 @@ export interface RequestProductBody {
 export interface AuthenticatedProductRequest extends Request<{}, {}, RequestProductBody> {
     userId?: string,
 }
+export interface AuthenticatedProductUpdateRequest extends Request<{ id?: string }, {}, RequestProductBody> {
+    userId?: string;
+}
 
 
 export interface RequestReviewBody {
@@ -106,3 +109,4 @@ export interface CustomFile {
     size: number;
     cloudinary?: UploadApiResponse;
 }
+

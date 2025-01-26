@@ -180,3 +180,17 @@ export const getAdminAddProduct = async (productData: FormData): Promise<any> =>
         throw error;
     }
 };
+export const AdiminUpdateProduct = async (productData: FormData, id: string = ""): Promise<any> => {
+    try {
+        const response = await api.put(`/product/admin/product/${id}`, productData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+

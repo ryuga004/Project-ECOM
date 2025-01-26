@@ -3,24 +3,43 @@ import Product from "../models/product.js";
 import User from "../models/user.js";
 import ApiFeatures from "../utils/apifeatures.js";
 import ErrorHandler from "../utils/utility-class.js";
+import { v2 as cloudinary } from "cloudinary";
+import { Readable } from "stream";
 // admin only
 export const createProduct = TryCatch(async (req, res, next) => {
-    const { name, description, price, category, stock, } = req.body;
+    const { name, description, price, category, stock } = req.body;
     const files = req.files;
     const images = [];
-    files.forEach(file => {
-        images.push({
-            imageId: file.filename,
-            url: `../uploads/${file.filename}`
-        });
-    });
+    if (files && files.length > 0) {
+        for (const file of files) {
+            const stream = Readable.from(file.buffer);
+            try {
+                const result = await new Promise((resolve, reject) => {
+                    const streamUpload = cloudinary.uploader.upload_stream({ folder: "posts" }, (error, result) => {
+                        if (result)
+                            resolve(result);
+                        else
+                            reject(error);
+                    });
+                    stream.pipe(streamUpload);
+                });
+                images.push({
+                    imageId: result.public_id,
+                    url: result.secure_url
+                });
+            }
+            catch (error) {
+                return next(new ErrorHandler("Image upload failed", 500));
+            }
+        }
+    }
     const product = await Product.create({
         name,
         description,
         price,
         category,
         stock,
-        images: images,
+        images,
         user: req.userId,
     });
     if (!product) {
@@ -156,8 +175,80 @@ export const deleteReview = TryCatch(async (req, res, next) => {
 });
 export const deleteProduct = TryCatch(async (req, res, next) => {
     const id = req.params.id;
+    const product = await Product.findById(id);
+    if (!product) {
+        return next(new ErrorHandler("Product not found", 404));
+    }
+    const images = product.images || [];
+    for (const image of images) {
+        try {
+            await cloudinary.uploader.destroy(image.imageId);
+        }
+        catch (err) {
+            console.error(`Failed to delete image with ID ${image.imageId}:`, err);
+        }
+    }
     await Product.deleteOne({ _id: id });
     return res.status(200).json({
         success: true,
+    });
+});
+export const updateProduct = TryCatch(async (req, res, next) => {
+    const { id } = req.params;
+    const { name, description, price, category, stock } = req.body;
+    const files = req.files;
+    console.log("req.body", req.body);
+    const product = await Product.findById(id);
+    if (!product) {
+        return next(new ErrorHandler("Product not found", 404));
+    }
+    const updatedData = {};
+    if (files && files.length > 0) {
+        for (const image of product.images) {
+            try {
+                await cloudinary.uploader.destroy(image.imageId);
+            }
+            catch (err) {
+                console.error(`Failed to delete image with ID ${image.imageId}:`, err);
+            }
+        }
+        updatedData.images = [];
+        for (const file of files) {
+            const stream = Readable.from(file.buffer);
+            try {
+                const result = await new Promise((resolve, reject) => {
+                    const streamUpload = cloudinary.uploader.upload_stream({ folder: "posts" }, (error, result) => {
+                        if (result)
+                            resolve(result);
+                        else
+                            reject(error);
+                    });
+                    stream.pipe(streamUpload);
+                });
+                updatedData.images.push({
+                    imageId: result.public_id,
+                    url: result.secure_url,
+                });
+            }
+            catch (error) {
+                return next(new ErrorHandler("Image upload failed", 500));
+            }
+        }
+    }
+    if (name && name !== product.name)
+        updatedData.name = name;
+    if (description && description !== product.description)
+        updatedData.description = description;
+    if (price && price !== product.price)
+        updatedData.price = price;
+    if (category && category !== product.category)
+        updatedData.category = category;
+    if (stock && stock !== product.stock)
+        updatedData.stock = stock;
+    await Product.updateOne({ _id: id }, { $set: updatedData });
+    const newProduct = await Product.findById(id);
+    return res.status(200).json({
+        success: true,
+        data: newProduct,
     });
 });

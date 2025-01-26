@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CgShoppingCart } from "react-icons/cg";
+import { RiShoppingBag2Fill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../route";
 import { useAppDispatch, useAppSelector } from "../store/hook";
@@ -15,7 +16,7 @@ const NavBar = () => {
     const handleLogout = async () => {
         const response = await logoutUser();
         if (response) {
-            dispatch((clearUser()));
+            dispatch(clearUser());
             navigate("/login");
         }
     };
@@ -23,13 +24,11 @@ const NavBar = () => {
     return (
         <nav className="bg-black shadow-lg w-full z-50">
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-                <h2
-                    className="text-2xl font-bold text-white cursor-pointer"
-                    onClick={() => navigate("/")}
-                >
-                    SHOPPER
-                </h2>
+                <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
 
+                    <RiShoppingBag2Fill className="text-white text-3xl" />
+                    <h2 className="text-3xl font-bold text-white">SHOPPER</h2>
+                </div>
 
                 <div className="flex items-center space-x-6">
 
@@ -44,7 +43,6 @@ const NavBar = () => {
                             </span>
                         )}
                     </div>
-
 
                     <div className="relative">
                         {user.profileImage ? (
@@ -62,7 +60,6 @@ const NavBar = () => {
                                 Login
                             </button>
                         )}
-
 
                         {isOpen && (
                             <div
