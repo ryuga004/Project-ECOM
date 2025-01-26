@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { CgChevronLeft, CgChevronRight } from "react-icons/cg";
 import { ImageBannerProps } from "../types/propsType";
 
