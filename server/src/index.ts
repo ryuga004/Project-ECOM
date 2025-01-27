@@ -19,7 +19,6 @@ const mongoURI = process.env.MONGO_URI || "";
 const api_key = process.env.api_key;
 const api_secret = process.env.api_secret;
 const cloud_name = process.env.cloud_name;
-const FrontendURL = process.env.FRONTEND_URL || "*";
 
 cloudinary.config({
     api_key,
@@ -30,7 +29,7 @@ cloudinary.config({
 const app = express();
 
 app.use(cors({
-    origin: FrontendURL,
+    origin: "https://project-ecom-frontend.vercel.app",
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['X-CSRF-Token', 'X-Requested-With', 'Accept', 'Accept-Version', 'Content-Length', 'Content-MD5', 'Content-Type', 'Date', 'X-Api-Version']
@@ -54,6 +53,5 @@ app.use(errorMiddleware);
 
 app.listen(PORT, () => {
     console.log("Server is running at " + `${PORT}`);
-    console.log("Frontend Url", FrontendURL);
 });
 
