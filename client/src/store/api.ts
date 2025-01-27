@@ -11,8 +11,8 @@ import {
 export const API = createApi({
     reducerPath: 'API',
     baseQuery: fetchBaseQuery({
-        // baseUrl: "http://localhost:5000/api/v1",
-        baseUrl: "https://project-ecom-backend.vercel.app/api/v1",
+        baseUrl: import.meta.env.VITE_BASE_URL,
+
         prepareHeaders(headers) {
 
             return headers;
