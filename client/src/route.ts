@@ -139,6 +139,7 @@ export const getAdminCustomers = async (): Promise<any> => {
         throw error;
     }
 };
+// Get all orders 
 export const getAdminOrders = async (): Promise<any> => {
     try {
         const response = await api.get('/order/admin/orders');
@@ -147,6 +148,7 @@ export const getAdminOrders = async (): Promise<any> => {
         throw error;
     }
 };
+// Get statitics data 
 export const getAdminAnalytics = async (): Promise<any> => {
     try {
         const response = await api.get('/admin/analytics');
