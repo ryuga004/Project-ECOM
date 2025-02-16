@@ -182,7 +182,7 @@ export const getAdminAddProduct = async (productData: FormData): Promise<any> =>
         throw error;
     }
 };
-// admin update product route 
+// admin update product routes
 export const AdiminUpdateProduct = async (productData: FormData, id: string = ""): Promise<any> => {
     try {
         const response = await api.put(`/product/admin/product/${id}`, productData);
