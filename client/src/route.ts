@@ -173,6 +173,7 @@ export const getAdminProductDelete = async (id: string): Promise<any> => {
         throw error;
     }
 };
+// for admin to add product 
 export const getAdminAddProduct = async (productData: FormData): Promise<any> => {
     try {
         const response = await api.post('/product/admin/product/new', productData);
@@ -181,6 +182,7 @@ export const getAdminAddProduct = async (productData: FormData): Promise<any> =>
         throw error;
     }
 };
+// admin update product route 
 export const AdiminUpdateProduct = async (productData: FormData, id: string = ""): Promise<any> => {
     try {
         const response = await api.put(`/product/admin/product/${id}`, productData);
