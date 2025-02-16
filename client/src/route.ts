@@ -70,6 +70,7 @@ export const logoutUser = async (): Promise<any> => {
 export const getCurrentUser = async (): Promise<any> => {
     try {
         const response = await api.get('/user/me');
+        console.log(response);
         return response.data;
     } catch (error) {
         throw error;
