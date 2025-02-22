@@ -158,6 +158,7 @@ export const getAdminAnalytics = async (): Promise<any> => {
         throw error;
     }
 };
+// Get admin products 
 export const getAdminProducts = async (): Promise<any> => {
     try {
         const response = await api.get('/product/admin/products');
