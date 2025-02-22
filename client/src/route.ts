@@ -167,6 +167,7 @@ export const getAdminProducts = async (): Promise<any> => {
         throw error;
     }
 };
+// Delete Request To Delet The Product 
 export const getAdminProductDelete = async (id: string): Promise<any> => {
     try {
         const response = await api.delete(`/product/admin/product/${id}`);
